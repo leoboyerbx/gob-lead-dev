@@ -1,4 +1,4 @@
-const { getSubscription, getProgressSubscription } = require('./pubSub');
+const { getSubscription } = require('./pubSub');
 const photoModel = require('./photo_model');
 const ZipStream = require('zip-stream');
 const { Storage } = require('@google-cloud/storage')
