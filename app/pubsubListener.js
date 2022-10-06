@@ -1,4 +1,4 @@
-const { getSubscription } = require('./pubSub');
+const { getSubscription, getProgressSubscription } = require('./pubSub');
 const photoModel = require('./photo_model');
 const ZipStream = require('zip-stream');
 const { Storage } = require('@google-cloud/storage')
@@ -64,4 +64,7 @@ module.exports = async function listenForMessages() {
     })
     message.ack()
   });
+
+
+  // const progressSubscription = await getProgressSubscription()
 };
