@@ -1,6 +1,6 @@
 const formValidator = require('./form_validator');
 const photoModel = require('./photo_model');
-const { getTopic, publishMessage } = require('./pubSub');
+const { publishMessage } = require('./pubSub');
 const { whatABeautifulDatabase } = require('./whatABeautifulDatabase');
 const { Storage } = require('@google-cloud/storage');
 const storage = new Storage()
@@ -18,6 +18,7 @@ function route(app) {
 
     // if no input params are passed in then render the view with out querying the api
     if (!tags && !tagmode) {
+      res.status(200)
       return res.render('index', ejsLocalVariables);
     }
 
@@ -36,7 +37,6 @@ function route(app) {
       }
       return true
     })
-    console.log(zipForTags)
     if(zipForTags) {
       const options = {
         action: 'read',
@@ -47,7 +47,6 @@ function route(app) {
         .file(zipForTags.name)
         .getSignedUrl(options);
       ejsLocalVariables.downloadZipUrl = signedUrl
-      console.log(signedUrl)
     }
     // get photos from flickr public feed api
     return photoModel
