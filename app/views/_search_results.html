@@ -3,6 +3,13 @@
 <div class="panel panel-default search-results">
   <div class="panel-heading">
     <h3 class="panel-title">Search Results</h3>
+    <br>
+    <a href='/zip?tags=<%= tagsParameter %>&tagmode=<%= tagmodeParameter %>' class="btn btn btn-primary" type='submit'>Create a ZIP</a>
+    <br>
+    <br>
+    <% if(downloadZipUrl) { %>
+    <a href='<%= downloadZipUrl %>' target='_blank'>Télécharger le zip prêt</a>
+    <% } %>
   </div>
   <div class="panel-body">
 

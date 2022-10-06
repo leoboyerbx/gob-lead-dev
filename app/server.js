@@ -5,6 +5,9 @@ const path = require('path');
 const app = express();
 
 // public assets
+process.env.GOOGLE_APPLICATION_CREDENTIALS = path.resolve(__dirname, 'secret', 'google.json')
+
+console.log(process.env.GOOGLE_APPLICATION_CREDENTIALS)
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(favicon(path.join(__dirname, 'public/images', 'favicon.ico')));
 app.use('/coverage', express.static(path.join(__dirname, '..', 'coverage')));
@@ -16,6 +19,7 @@ app.set('view engine', 'html');
 
 // load route
 require('./route')(app);
+require('./pubsubListener')();
 
 // server
 const port = process.env.PORT || 3000;
