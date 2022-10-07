@@ -1,33 +1,60 @@
-# express-app-testing-demo
+# 
 
-This project is a simple express app for demonstrating testing and code coverage.
-[Jest](https://facebook.github.io/jest/) and
-[Supertest](https://github.com/visionmedia/supertest) are used for testing.
-Jest is also used for mocking functions and measuring code coverage.
-Note that this app only focuses on server-side JavaScript testing.
+# TP: Coding style et Infra
 
+## Coding style
 
-## Requirements
+Si c'était pour mon entreprise:
 
-* Node.js - [https://nodejs.org/](https://nodejs.org/)
+Coté client:
 
+- Utiliser les conventions modernes de Javascript (ES2020)
+  - Sauf dans le cadre d'un projet legacy avec besoin de supporter des vieux navigateurs. Dans ce cas, toujours se référer à [https://caniuse.com/](https://caniuse.com/)
+- Utiliser Typescript dès qu'on est dans le contexte d'un bundler, pour profiter du typage (meilleure robustesse, amélioration de l'aide de l'IDE...)
+- Utiliser ESLint pour définir les règles de style
+  - Règles de [typescript-eslint.io](https://typescript-eslint.io)
+- Utiliser Prettier et configurer son IDE pour formatter automatiquement à l'enregistrement (on évite ainsi des commits de code style faits par une CI)
 
-## Getting Started
+Coté serveur:
 
-* Clone the repo
-* Install dependencies with `npm install`
-* Run server with `npm start` and go here:
-[http://localhost:3000/](http://localhost:3000/)
+- Suivre les règles de [Wordpress](https://developer.wordpress.org/coding-standards/wordpress-coding-standards/) pour les projets wordpress, afin d'avoir une consistance globale.
+- Suivre les règles de [CakePHP](https://book.cakephp.org/4/fr/contributing/cakephp-coding-conventions.html) pour les autres projets (qui étend légèrement le PSR-12). Choix effectué car Cake est le framework le plus utilisé sur les projets passés.
 
+## Choix d'infrastructure
 
-## Running Tests
+Pour déployer une app similaire à celle de ce TP, mais grande échelle. (10K simultanés en pic, ~ 5M par jour)
 
-* Run unit and integration tests: `npm test`
-* Run end-to-end tests: `npm run test:e2e`
+On lui ajoute une UI autonome SPA en Vue.js, hébergée sur Firebase hosting.
 
-## Code Coverage Report
+On réécrit l'API en cloud functions.
 
-A new code coverage report is generated every time `npm test` runs.
-Normally this coverage report is ignored by git.
-This project includes it in source control so the coverage report can be viewed in the demo app:
-[http://express-app-testing-demo.herokuapp.com/coverage/lcov-report/index.html](http://express-app-testing-demo.herokuapp.com/coverage/lcov-report/index.html)
+On sépare le code node de l'API et celui du worker, pour les mettre chacun dans leur fonction propre. On garde Google PubSub pour les faire communiquer entre eux (avec les functions CloudEvents: [https://cloud.google.com/functions/docs/calling/pubsub](https://cloud.google.com/functions/docs/calling/pubsub)).
+
+On conserve Firebase RTDB
+
+Devs nécessaires: 2
+
+- Un dev back-end et devops
+- Un dev front-end pour faire une UI correcte
+
+Services nécessaires:
+
+- PubSub
+  - 20B environ par message, donc 100MB par jour
+  - Estimation: 0€
+- Firebase Realtime Database
+  - ~500MB par jour donc ~5GB par mois, on garde les données un mois
+  - Estimation 25$/mois
+- Google Cloud Storage
+  - ~5MB par zip
+  - On considère que 10% des utilisateurs uploadent un zip (à ajuster avec des tests UX)
+  - Donc 500 000 zips par mois -> 250 GB
+  - Estimation: 5$
+- Firebase Hosting:
+  - 20K par page
+  - 1GB par jour de bandwidth
+  - Estimation: 3$ par mois
+- Google Cloud functions
+  - ~ 6M de calls par mois
+  - Estimation: 7$
+- Coût total: 15$ par mois pour 5M d'utilisateurs journaliers
