@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">20.93% </span>
+                <span class="strong">24.52% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>9/43</span>
+                <span class='fraction'>13/53</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">11.11% </span>
+                <span class="strong">20% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>1/9</span>
+                <span class='fraction'>2/10</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">21.42% </span>
+                <span class="strong">25% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>9/42</span>
+                <span class='fraction'>13/52</span>
             </div>
         
             
@@ -133,7 +133,23 @@
 <a name='L68'></a><a href='#L68'>68</a>
 <a name='L69'></a><a href='#L69'>69</a>
 <a name='L70'></a><a href='#L70'>70</a>
-<a name='L71'></a><a href='#L71'>71</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L71'></a><a href='#L71'>71</a>
+<a name='L72'></a><a href='#L72'>72</a>
+<a name='L73'></a><a href='#L73'>73</a>
+<a name='L74'></a><a href='#L74'>74</a>
+<a name='L75'></a><a href='#L75'>75</a>
+<a name='L76'></a><a href='#L76'>76</a>
+<a name='L77'></a><a href='#L77'>77</a>
+<a name='L78'></a><a href='#L78'>78</a>
+<a name='L79'></a><a href='#L79'>79</a>
+<a name='L80'></a><a href='#L80'>80</a>
+<a name='L81'></a><a href='#L81'>81</a>
+<a name='L82'></a><a href='#L82'>82</a>
+<a name='L83'></a><a href='#L83'>83</a>
+<a name='L84'></a><a href='#L84'>84</a>
+<a name='L85'></a><a href='#L85'>85</a>
+<a name='L86'></a><a href='#L86'>86</a>
+<a name='L87'></a><a href='#L87'>87</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -166,10 +182,20 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -194,21 +220,27 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">const { getSubscription } = require('./pubSub');
 const photoModel = require('./photo_model');
 const ZipStream = require('zip-stream');
 const { Storage } = require('@google-cloud/storage')
 const request = require('request');
-const { whatABeautifulDatabase } = require('./whatABeautifulDatabase');
+const { db } = require('./database');
 &nbsp;
 function <span class="fstat-no" title="function not covered" >makeid(</span>length) {
   let result           = <span class="cstat-no" title="statement not covered" >'';</span>
@@ -234,12 +266,22 @@ async function <span class="fstat-no" title="function not covered" >createZip(</
   const zip = <span class="cstat-no" title="statement not covered" >new ZipStream();</span>
 <span class="cstat-no" title="statement not covered" >  zip.pipe(writeStream)</span>
 &nbsp;
+&nbsp;
+  const ref = <span class="cstat-no" title="statement not covered" >db.ref('pnk/zipJobs/' + tags)</span>
+&nbsp;
+  const photosNbr = <span class="cstat-no" title="statement not covered" >photos.length</span>
+  let photoIndex = <span class="cstat-no" title="statement not covered" >0</span>
+&nbsp;
   function <span class="fstat-no" title="function not covered" >addNextFile(</span>) {
     const photo = <span class="cstat-no" title="statement not covered" >photos.shift()</span>
     const stream = <span class="cstat-no" title="statement not covered" >request(photo.media.b)</span>
-<span class="cstat-no" title="statement not covered" >    zip.entry(stream, { name: photo.title + '.jpg' }, <span class="fstat-no" title="function not covered" >er</span>r =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    zip.entry(stream, { name: photo.title + '.jpg' }, <span class="fstat-no" title="function not covered" >as</span>ync err =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >      if(err)</span>
 <span class="cstat-no" title="statement not covered" >        throw err;</span>
+<span class="cstat-no" title="statement not covered" >      photoIndex++</span>
+<span class="cstat-no" title="statement not covered" >      await ref.set({</span>
+        progress: photoIndex / photosNbr
+      })
 <span class="cstat-no" title="statement not covered" >      if(photos.length &gt; 0)</span>
 <span class="cstat-no" title="statement not covered" >        addNextFile()</span>
       else
@@ -260,18 +302,24 @@ async function <span class="fstat-no" title="function not covered" >createZip(</
 &nbsp;
 module.exports = async function listenForMessages() {
   const subscription = await getSubscription();
-  subscription.on('message', <span class="fstat-no" title="function not covered" >as</span>ync message =&gt; {
+  const messageHandler =  <span class="fstat-no" title="function not covered" >as</span>ync message =&gt; {
     const tags = <span class="cstat-no" title="statement not covered" >message.data.toString()</span>
     const zip = <span class="cstat-no" title="statement not covered" >await createZip(tags);</span>
-<span class="cstat-no" title="statement not covered" >    whatABeautifulDatabase.data.push({</span>
-      name: zip.name,
-      tags
+    const ref = <span class="cstat-no" title="statement not covered" >db.ref('pnk/zipJobs/' + tags)</span>
+<span class="cstat-no" title="statement not covered" >    await ref.set({</span>
+      zip: zip.name,
+      progress: 1
     })
 <span class="cstat-no" title="statement not covered" >    message.ack()</span>
-  });
+  }
+  subscription.on('message', messageHandler);
 &nbsp;
 &nbsp;
   // const progressSubscription = await getProgressSubscription()
+  const unsubscribe = () =&gt; {
+    subscription.removeListener('message', messageHandler)
+  }
+  return unsubscribe
 };
 &nbsp;</pre></td></tr></table></pre>
 
@@ -280,7 +328,7 @@ module.exports = async function listenForMessages() {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-10-06T12:03:59.332Z
+                at 2022-10-07T08:12:31.494Z
             </div>
         <script src="prettify.js"></script>
         <script>

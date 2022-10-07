@@ -18,11 +18,18 @@ app.set('view engine', 'html');
 
 // load route
 require('./route')(app);
-require('./pubsubListener')();
 
 // server
 const port = process.env.PORT || 3000;
 app.server = app.listen(port);
+
+
+require('./pubsubListener')().then(unsubscribe => {
+  app.server.on('close', () => {
+    unsubscribe()
+  })
+})
+
 console.log(`listening on port ${port}`);
 
 module.exports = app;

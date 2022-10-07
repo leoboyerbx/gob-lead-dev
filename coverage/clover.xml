@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1665057839338" clover="3.2.0">
-  <project timestamp="1665057839338" name="All files">
-    <metrics statements="135" coveredstatements="87" conditionals="26" coveredconditionals="17" methods="27" coveredmethods="13" elements="188" coveredelements="117" complexity="0" loc="135" ncloc="135" packages="1" files="8" classes="8"/>
+<coverage generated="1665130351501" clover="3.2.0">
+  <project timestamp="1665130351501" name="All files">
+    <metrics statements="157" coveredstatements="94" conditionals="26" coveredconditionals="16" methods="30" coveredmethods="16" elements="213" coveredelements="126" complexity="0" loc="157" ncloc="157" packages="1" files="8" classes="8"/>
+    <file name="database.js" path="/Users/ponk/gobelins/LeadDev/app-test/app/database.js">
+      <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <line num="1" count="1" type="stmt"/>
+      <line num="2" count="1" type="stmt"/>
+      <line num="4" count="1" type="stmt"/>
+      <line num="8" count="1" type="stmt"/>
+    </file>
     <file name="form_validator.js" path="/Users/ponk/gobelins/LeadDev/app-test/app/form_validator.js">
       <metrics statements="5" coveredstatements="5" conditionals="4" coveredconditionals="4" methods="3" coveredmethods="3"/>
       <line num="3" count="10" type="stmt"/>
@@ -55,7 +62,7 @@
       <line num="30" count="1" type="stmt"/>
     </file>
     <file name="pubsubListener.js" path="/Users/ponk/gobelins/LeadDev/app-test/app/pubsubListener.js">
-      <metrics statements="42" coveredstatements="9" conditionals="6" coveredconditionals="0" methods="9" coveredmethods="1"/>
+      <metrics statements="52" coveredstatements="13" conditionals="6" coveredconditionals="0" methods="10" coveredmethods="2"/>
       <line num="1" count="1" type="stmt"/>
       <line num="2" count="1" type="stmt"/>
       <line num="3" count="1" type="stmt"/>
@@ -78,29 +85,39 @@
       <line num="29" count="0" type="stmt"/>
       <line num="30" count="0" type="stmt"/>
       <line num="33" count="0" type="stmt"/>
-      <line num="34" count="0" type="stmt"/>
       <line num="35" count="0" type="stmt"/>
-      <line num="36" count="0" type="cond" truecount="0" falsecount="2"/>
-      <line num="37" count="0" type="stmt"/>
-      <line num="38" count="0" type="cond" truecount="0" falsecount="2"/>
+      <line num="36" count="0" type="stmt"/>
       <line num="39" count="0" type="stmt"/>
+      <line num="40" count="0" type="stmt"/>
       <line num="41" count="0" type="stmt"/>
+      <line num="42" count="0" type="cond" truecount="0" falsecount="2"/>
+      <line num="43" count="0" type="stmt"/>
       <line num="44" count="0" type="stmt"/>
-      <line num="46" count="0" type="stmt"/>
-      <line num="47" count="0" type="stmt"/>
-      <line num="48" count="0" type="stmt"/>
-      <line num="50" count="0" type="stmt"/>
+      <line num="45" count="0" type="stmt"/>
+      <line num="48" count="0" type="cond" truecount="0" falsecount="2"/>
+      <line num="49" count="0" type="stmt"/>
       <line num="51" count="0" type="stmt"/>
-      <line num="56" count="1" type="stmt"/>
-      <line num="57" count="1" type="stmt"/>
-      <line num="58" count="1" type="stmt"/>
-      <line num="59" count="0" type="stmt"/>
+      <line num="54" count="0" type="stmt"/>
+      <line num="56" count="0" type="stmt"/>
+      <line num="57" count="0" type="stmt"/>
+      <line num="58" count="0" type="stmt"/>
       <line num="60" count="0" type="stmt"/>
       <line num="61" count="0" type="stmt"/>
-      <line num="65" count="0" type="stmt"/>
+      <line num="66" count="1" type="stmt"/>
+      <line num="67" count="1" type="stmt"/>
+      <line num="68" count="1" type="stmt"/>
+      <line num="69" count="0" type="stmt"/>
+      <line num="70" count="0" type="stmt"/>
+      <line num="71" count="0" type="stmt"/>
+      <line num="72" count="0" type="stmt"/>
+      <line num="76" count="0" type="stmt"/>
+      <line num="78" count="1" type="stmt"/>
+      <line num="82" count="1" type="stmt"/>
+      <line num="83" count="3" type="stmt"/>
+      <line num="85" count="1" type="stmt"/>
     </file>
     <file name="route.js" path="/Users/ponk/gobelins/LeadDev/app-test/app/route.js">
-      <metrics statements="35" coveredstatements="26" conditionals="14" coveredconditionals="11" methods="6" coveredmethods="4"/>
+      <metrics statements="42" coveredstatements="24" conditionals="14" coveredconditionals="10" methods="6" coveredmethods="4"/>
       <line num="1" count="1" type="stmt"/>
       <line num="2" count="1" type="stmt"/>
       <line num="3" count="1" type="stmt"/>
@@ -117,28 +134,35 @@
       <line num="26" count="3" type="cond" truecount="2" falsecount="0"/>
       <line num="27" count="1" type="stmt"/>
       <line num="28" count="1" type="stmt"/>
-      <line num="31" count="2" type="stmt"/>
-      <line num="33" count="2" type="stmt"/>
-      <line num="34" count="0" type="cond" truecount="0" falsecount="2"/>
-      <line num="35" count="0" type="stmt"/>
-      <line num="36" count="0" type="stmt"/>
-      <line num="38" count="0" type="stmt"/>
-      <line num="40" count="2" type="cond" truecount="1" falsecount="1"/>
-      <line num="41" count="0" type="stmt"/>
+      <line num="30" count="2" type="stmt"/>
+      <line num="33" count="1" type="stmt"/>
+      <line num="34" count="1" type="stmt"/>
+      <line num="35" count="1" type="stmt"/>
+      <line num="38" count="1" type="stmt"/>
+      <line num="42" count="1" type="stmt"/>
+      <line num="43" count="0" type="stmt"/>
+      <line num="44" count="0" type="cond" truecount="0" falsecount="2"/>
       <line num="45" count="0" type="stmt"/>
-      <line num="49" count="0" type="stmt"/>
-      <line num="52" count="2" type="stmt"/>
-      <line num="55" count="1" type="stmt"/>
-      <line num="56" count="1" type="stmt"/>
-      <line num="57" count="1" type="stmt"/>
-      <line num="60" count="1" type="stmt"/>
-      <line num="64" count="1" type="stmt"/>
-      <line num="65" count="0" type="stmt"/>
-      <line num="66" count="0" type="stmt"/>
-      <line num="70" count="1" type="stmt"/>
+      <line num="47" count="0" type="stmt"/>
+      <line num="48" count="0" type="stmt"/>
+      <line num="51" count="0" type="stmt"/>
+      <line num="52" count="0" type="stmt"/>
+      <line num="54" count="1" type="stmt"/>
+      <line num="55" count="0" type="cond" truecount="0" falsecount="2"/>
+      <line num="56" count="0" type="stmt"/>
+      <line num="57" count="0" type="stmt"/>
+      <line num="59" count="0" type="stmt"/>
+      <line num="63" count="0" type="stmt"/>
+      <line num="64" count="0" type="stmt"/>
+      <line num="68" count="0" type="stmt"/>
+      <line num="69" count="0" type="stmt"/>
+      <line num="71" count="0" type="stmt"/>
+      <line num="72" count="0" type="stmt"/>
+      <line num="73" count="0" type="stmt"/>
+      <line num="78" count="1" type="stmt"/>
     </file>
     <file name="server.js" path="/Users/ponk/gobelins/LeadDev/app-test/app/server.js">
-      <metrics statements="17" coveredstatements="17" conditionals="2" coveredconditionals="2" methods="0" coveredmethods="0"/>
+      <metrics statements="19" coveredstatements="19" conditionals="2" coveredconditionals="2" methods="2" coveredmethods="2"/>
       <line num="1" count="1" type="stmt"/>
       <line num="2" count="1" type="stmt"/>
       <line num="3" count="1" type="stmt"/>
@@ -151,15 +175,13 @@
       <line num="16" count="1" type="stmt"/>
       <line num="17" count="1" type="stmt"/>
       <line num="20" count="1" type="stmt"/>
-      <line num="21" count="1" type="stmt"/>
-      <line num="24" count="1" type="cond" truecount="2" falsecount="0"/>
-      <line num="25" count="1" type="stmt"/>
-      <line num="26" count="1" type="stmt"/>
+      <line num="23" count="1" type="cond" truecount="2" falsecount="0"/>
+      <line num="24" count="1" type="stmt"/>
+      <line num="27" count="1" type="stmt"/>
       <line num="28" count="1" type="stmt"/>
-    </file>
-    <file name="whatABeautifulDatabase.js" path="/Users/ponk/gobelins/LeadDev/app-test/app/whatABeautifulDatabase.js">
-      <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-      <line num="1" count="1" type="stmt"/>
+      <line num="29" count="3" type="stmt"/>
+      <line num="33" count="1" type="stmt"/>
+      <line num="35" count="1" type="stmt"/>
     </file>
   </project>
 </coverage>

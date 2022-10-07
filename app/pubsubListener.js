@@ -65,7 +65,7 @@ async function createZip(tags) {
 
 module.exports = async function listenForMessages() {
   const subscription = await getSubscription();
-  subscription.on('message', async message => {
+  const messageHandler =  async message => {
     const tags = message.data.toString()
     const zip = await createZip(tags);
     const ref = db.ref('pnk/zipJobs/' + tags)
@@ -74,8 +74,13 @@ module.exports = async function listenForMessages() {
       progress: 1
     })
     message.ack()
-  });
+  }
+  subscription.on('message', messageHandler);
 
 
   // const progressSubscription = await getProgressSubscription()
+  const unsubscribe = () => {
+    subscription.removeListener('message', messageHandler)
+  }
+  return unsubscribe
 };
