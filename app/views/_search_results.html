@@ -4,12 +4,10 @@
   <div class="panel-heading">
     <h3 class="panel-title">Search Results</h3>
     <br>
-    <a href='/zip?tags=<%= tagsParameter %>&tagmode=<%= tagmodeParameter %>' class="btn btn btn-primary" type='submit'>Create a ZIP</a>
+    <a id='downloadButton' class="btn btn btn-primary disabled"></a>
+    <button id='zipButton' class="btn btn btn-primary">Create a ZIP</button>
+    <button id='googleLogin' class='btn btn-danger'>Log in with Google</button>
     <br>
-    <br>
-    <% if(downloadZipUrl) { %>
-    <a href='<%= downloadZipUrl %>' target='_blank'>Télécharger le zip prêt</a>
-    <% } %>
   </div>
   <div class="panel-body">
 

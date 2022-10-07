@@ -1,8 +1,8 @@
 const formValidator = require('./form_validator');
 const photoModel = require('./photo_model');
 const { publishMessage } = require('./pubSub');
-const { whatABeautifulDatabase } = require('./whatABeautifulDatabase');
 const { Storage } = require('@google-cloud/storage');
+const { db } = require('./database');
 const storage = new Storage()
 function route(app) {
   app.get('/', async (req, res) => {
@@ -27,28 +27,6 @@ function route(app) {
       ejsLocalVariables.invalidParameters = true;
       return res.render('index', ejsLocalVariables);
     }
-
-    ejsLocalVariables.downloadZipUrl = ''
-    let zipForTags
-    whatABeautifulDatabase.data = whatABeautifulDatabase.data.filter(item => {
-      if (item.tags === tags) {
-        zipForTags = item
-        return false
-      }
-      return true
-    })
-    if(zipForTags) {
-      const options = {
-        action: 'read',
-        expires: +Date.now() + (2 * 24 * 60 * 60 * 1000)
-      };
-      const signedUrl = await storage
-        .bucket('dmii2022bucket')
-        .file(zipForTags.name)
-        .getSignedUrl(options);
-      ejsLocalVariables.downloadZipUrl = signedUrl
-    }
-    // get photos from flickr public feed api
     return photoModel
       .getFlickrPhotos(tags, tagmode)
       .then(photos => {
@@ -62,8 +40,38 @@ function route(app) {
   });
 
   app.get('/zip', async (req, res) => {
-    await publishMessage(req.query.tags)
-    res.redirect('/?tags=' + req.query.tags + '&tagmode=' + req.query.tagmode)
+    const tags = req.query.tags
+    if (!tags) {
+      req.end('no tags')
+    }
+    const ref = db.ref('pnk/zipJobs/' + tags)
+    await ref.set({
+      progress: 0
+    })
+    await publishMessage(tags)
+    res.end('ok')
+  })
+  app.get('/getZipUrl', async (req, res) => {
+    if (!req.query.file) {
+      res.status(400)
+      res.end('missing parameter.')
+    }
+    const options = {
+      action: 'read',
+      expires: +Date.now() + (2 * 24 * 60 * 60 * 1000)
+    };
+    try {
+      const [signedUrl] = await storage
+        .bucket('dmii2022bucket')
+        .file(req.query.file)
+        .getSignedUrl(options);
+      res.status(200)
+      res.end(signedUrl)
+    } catch (e) {
+      res.status(500)
+      console.error(e)
+      res.end('error')
+    }
   })
 }
 
