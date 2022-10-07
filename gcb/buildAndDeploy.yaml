@@ -4,12 +4,12 @@ steps:
   args:
   - 'build'
   - '-t'
-  - 'gcr.io/leadtechnique2022/container-image-gobleaddev:$SHORT_SHA'
+  - 'gcr.io/leadtechnique2022-kubernetes/container-image-gobleaddev:$SHORT_SHA'
   - '.'
 - name: 'gcr.io/cloud-builders/docker'
   id: PushDockerContainer
   args:
   - 'push'
-  - 'gcr.io/leadtechnique2022/container-image-gobleaddev:$SHORT_SHA'
+  - 'gcr.io/leadtechnique2022-kubernetes/container-image-gobleaddev:$SHORT_SHA'
 - name: 'gcr.io/cloud-builders/kubectl'
-  args: ['set', 'image', 'deployment', 'myDeployment', 'myOnlyContainer=gcr.io/leadtechnique2022/container-image-gobleaddev:${SHORT_SHA}']
+  args: ['set', 'image', 'deployment', 'myDeployment', 'myOnlyContainer=gcr.io/leadtechnique2022-kubernetes/container-image-gobleaddev:${SHORT_SHA}']
