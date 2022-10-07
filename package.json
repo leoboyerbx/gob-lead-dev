@@ -11,7 +11,7 @@
     "start": "nodemon app/server.js",
     "test": "npm run lint && npm run jest",
     "test:e2e": "jest --runInBand e2e_tests/*.test.js",
-    "jest": "jest --coverage app/__tests__/*.test.js",
+    "jest": "jest --coverage --detectOpenHandles app/__tests__/*.test.js",
     "lint": "eslint app e2e_tests",
     "prettier": "prettier --write app/*.js app/__{tests,mocks}__/*.js e2e_tests/*.js"
   },
@@ -21,6 +21,7 @@
     "body-parser": "^1.20.0",
     "ejs": "^3.1.8",
     "express": "~4.16.2",
+    "firebase-admin": "^11.0.1",
     "got": "^8.0.1",
     "request": "^2.88.2",
     "serve-favicon": "^2.4.5",

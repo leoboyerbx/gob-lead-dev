@@ -1,9 +1,9 @@
-const { getSubscription, getProgressSubscription } = require('./pubSub');
+const { getSubscription } = require('./pubSub');
 const photoModel = require('./photo_model');
 const ZipStream = require('zip-stream');
 const { Storage } = require('@google-cloud/storage')
 const request = require('request');
-const { whatABeautifulDatabase } = require('./whatABeautifulDatabase');
+const { db } = require('./database');
 
 function makeid(length) {
   let result           = '';
@@ -29,12 +29,22 @@ async function createZip(tags) {
   const zip = new ZipStream();
   zip.pipe(writeStream)
 
+
+  const ref = db.ref('pnk/zipJobs/' + tags)
+
+  const photosNbr = photos.length
+  let photoIndex = 0
+
   function addNextFile() {
     const photo = photos.shift()
     const stream = request(photo.media.b)
-    zip.entry(stream, { name: photo.title + '.jpg' }, err => {
+    zip.entry(stream, { name: photo.title + '.jpg' }, async err => {
       if(err)
         throw err;
+      photoIndex++
+      await ref.set({
+        progress: photoIndex / photosNbr
+      })
       if(photos.length > 0)
         addNextFile()
       else
@@ -55,16 +65,22 @@ async function createZip(tags) {
 
 module.exports = async function listenForMessages() {
   const subscription = await getSubscription();
-  subscription.on('message', async message => {
+  const messageHandler =  async message => {
     const tags = message.data.toString()
     const zip = await createZip(tags);
-    whatABeautifulDatabase.data.push({
-      name: zip.name,
-      tags
+    const ref = db.ref('pnk/zipJobs/' + tags)
+    await ref.set({
+      zip: zip.name,
+      progress: 1
     })
     message.ack()
-  });
+  }
+  subscription.on('message', messageHandler);
 
 
   // const progressSubscription = await getProgressSubscription()
+  const unsubscribe = () => {
+    subscription.removeListener('message', messageHandler)
+  }
+  return unsubscribe
 };
